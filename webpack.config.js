@@ -1,10 +1,12 @@
 const Path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -63,6 +65,11 @@ module.exports = {
             options: { minimize: true }
           }
         ]
+      },
+      {
+        type: 'javascript/auto',
+        test: /\.json$/,
+        use: ['json-loader']
       }
     ]
   },
@@ -109,7 +116,12 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({ template: './src/assets/index.html' }),
+    new CopyWebpackPlugin([
+      { from: './src/assets/favicon.ico', to: '' },
+      { from: './src/assets/apple-touch-icon.png', to: '' }
+    ]),
     new MiniCssExtractPlugin({ filename: '[name].css?[hash]' }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new HardSourceWebpackPlugin({ cacheDirectory: Path.join(__dirname, '.cache') })
   ]
 }

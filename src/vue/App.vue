@@ -18,9 +18,9 @@
 
   @Component
   export default class App extends Vue {
-    greeting: string = 'Hello';
+    private greeting: string = 'Hello';
 
-    onClick() {
+    private onClick() {
       this.greeting = 'Click';
     }
   }
@@ -31,7 +31,7 @@
   //$color: blue;
 
   div {
-    background: inline(../assets/img/logo.png) no-repeat;
+    background: inline(../assets/img/internal.png) no-repeat;
   }
 
   p {
