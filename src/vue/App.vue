@@ -1,6 +1,9 @@
 <template>
   <div>
-    <p>{{ greeting }} World!</p>
+    <p @click="onClick">{{ greeting }} World!</p>
+    <router-link to="/page1">to Page1</router-link>
+    <router-link to="/page2">to Page2</router-link>
+    <router-view></router-view>
     <div>
       <p>nested</p>
     </div>
@@ -11,13 +14,13 @@
 </template>
 
 <script lang="ts">
-  import { Vue, Component } from 'vue-property-decorator'
+  import { Vue, Component } from 'vue-property-decorator';
 
   @Component
   export default class App extends Vue {
-    greeting: string = 'Hello'
+    greeting: string = 'Hello';
 
-    onClick(): void {
+    onClick() {
       this.greeting = 'Click';
     }
   }
@@ -26,6 +29,10 @@
 <style lang="scss" scoped>
   $color: red;
   //$color: blue;
+
+  div {
+    background: inline(../assets/img/logo.png) no-repeat;
+  }
 
   p {
     font-size: 2em;

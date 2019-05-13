@@ -24,7 +24,10 @@ module.exports = {
       },
       {
         test: /\.ts$/,
-        use: ['ts-loader', 'tslint-loader']
+        use: [
+          { loader: 'ts-loader', options: { appendTsSuffixTo: [/\.vue$/] } },
+          'tslint-loader'
+        ]
       },
       {
         test: /\.(css|scss)$/,
@@ -45,6 +48,7 @@ module.exports = {
                 }),
                 require('postcss-nested'),
                 require('postcss-simple-vars'),
+                require('postcss-assets'),
                 require('autoprefixer')({ browsers: ['last 2 versions'] })
               ]
             }
