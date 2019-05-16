@@ -7,15 +7,16 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
-module.exports = {
+const AppConfig = {
   mode: 'production',
   entry: {
     app: './src/app.js'
   },
   output: {
     path: Path.join(__dirname, 'dist'),
-    filename: '[name].js?[hash]',
+    filename: '[name].js',
     publicPath: '/'
   },
   module: {
@@ -59,17 +60,20 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: { minimize: true }
-          }
-        ]
+        use: ['html-loader?minimize=true']
       },
       {
         type: 'javascript/auto',
         test: /\.json$/,
         use: ['json-loader']
+      },
+      {
+        test: /\.(gif|png|jpg)$/,
+        use: ['file-loader?name=img/[name].[ext]']
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        use: ['file-loader?name=fonts/[name].[ext]']
       }
     ]
   },
@@ -115,13 +119,58 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({ template: './src/assets/index.html' }),
+    new HtmlWebpackPlugin({ template: './src/assets/index.html', hash: true }),
     new CopyWebpackPlugin([
       { from: './src/assets/favicon.ico', to: '' },
       { from: './src/assets/apple-touch-icon.png', to: '' }
     ]),
-    new MiniCssExtractPlugin({ filename: '[name].css?[hash]' }),
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
     new CleanWebpackPlugin(),
     new HardSourceWebpackPlugin({ cacheDirectory: Path.join(__dirname, '.cache') })
-  ]
+  ],
+  performance: {
+    maxEntrypointSize: (1024 * 1024),
+    maxAssetSize: (1024 * 1024)
+  }
 }
+
+const ServerConfig = {
+  mode: 'production',
+  entry: {
+    server: './src/server.js'
+  },
+  target: 'node',
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
+  externals: [nodeExternals()],
+  output: {
+    path: Path.resolve(__dirname, 'bin'),
+    filename: 'httpd',
+    publicPath: '/'
+  },
+  resolve: {
+    modules: ['node_modules']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: ['ts-loader', 'tslint-loader']
+      },
+      {
+        type: 'javascript/auto',
+        test: /\.json$/,
+        use: ['json-loader']
+      }
+    ]
+  },
+  performance: {
+    maxEntrypointSize: (1024 * 1024),
+    maxAssetSize: (1024 * 1024)
+  }
+}
+
+module.exports = [AppConfig, ServerConfig];

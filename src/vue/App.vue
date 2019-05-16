@@ -1,5 +1,7 @@
 <template>
   <div>
+    <v-btn><v-icon>home</v-icon> Home</v-btn>
+    <img src="../assets/img/external.png" />
     <p @click="onClick">{{ greeting }} World!</p>
     <router-link to="/page1">to Page1</router-link>
     <router-link to="/page2">to Page2</router-link>
