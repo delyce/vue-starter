@@ -51,7 +51,7 @@ const AppConfig = {
                 }),
                 require('postcss-nested'),
                 require('postcss-simple-vars'),
-                require('postcss-assets'),
+                require('postcss-assets')({ relative: true }),
                 require('autoprefixer')({ browsers: ['last 2 versions'] })
               ]
             }
@@ -69,11 +69,11 @@ const AppConfig = {
       },
       {
         test: /\.(gif|png|jpg)$/,
-        use: ['file-loader?name=img/[name].[ext]']
+        use: ['file-loader?name=img/[name].[ext]?[md5:hash:base64:5]']
       },
       {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
-        use: ['file-loader?name=fonts/[name].[ext]']
+        use: ['file-loader?name=fonts/[name].[ext]?[md5:hash:base64:5]']
       }
     ]
   },
