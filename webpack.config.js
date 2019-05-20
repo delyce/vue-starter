@@ -1,5 +1,6 @@
 const Path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -74,6 +75,10 @@ const AppConfig = {
       {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
         use: ['file-loader?name=fonts/[name].[ext]?[md5:hash:base64:5]']
+      },
+      {
+        test: /\.styl$/,
+        use: ['style-loader', 'css-loader', 'stylus-loader']
       }
     ]
   },
@@ -114,11 +119,14 @@ const AppConfig = {
   },
   resolve: {
     alias: {
-      vue$: 'vue/dist/vue.runtime.min.js'
+      vue$: 'vue/dist/vue.runtime.esm.js',
+      vuex$: 'vuex/dist/vuex.esm.js',
+      /vue-router$/: 'vue-router/dist/vue-router.esm.js'
     },
   },
   plugins: [
     new VueLoaderPlugin(),
+    new VuetifyLoaderPlugin(),
     new HtmlWebpackPlugin({ template: './src/assets/index.html', hash: true }),
     new CopyWebpackPlugin([
       { from: './src/assets/favicon.ico', to: '' },

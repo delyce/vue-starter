@@ -34,6 +34,8 @@
     "stylelint": "^10.0.1",
     "stylelint-order": "^3.0.0",
     "stylelint-scss": "^3.6.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
     "terser-webpack-plugin": "^1.2.3",
     "ts-loader": "^6.0.0",
     "tslint": "^5.16.0",
