@@ -120,8 +120,7 @@ const AppConfig = {
   resolve: {
     alias: {
       vue$: 'vue/dist/vue.runtime.esm.js',
-      vuex$: 'vuex/dist/vuex.esm.js',
-      /vue-router$/: 'vue-router/dist/vue-router.esm.js'
+      vuex$: 'vuex/dist/vuex.esm.js'
     },
   },
   plugins: [
