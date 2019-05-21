@@ -2,27 +2,27 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify/lib';
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import VuetifyStyle from 'vuetify/src/stylus/app.styl';
+import Axios from 'axios';
+import VueAxios from 'vue-axios';
+import VueLazyload from 'vue-lazyload';
+
+import Env from './main-env.json';
+import Style from './main-style.scss';
 
 import App from './vue/App.vue';
 import Page1 from './vue/Page1.vue';
 import Page2 from './vue/Page2.vue';
 
-//import 'vuetify/dist/vuetify.css';
-import 'vuetify/src/stylus/app.styl';
-//import 'typeface-noto-sans';
-import 'material-design-icons-iconfont/dist/material-design-icons.css';
-import './app-style.scss';
-
 Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(Vuetify);
-Vue.use(VueAxios, axios);
+Vue.use(VueAxios, Axios);
+Vue.use(VueLazyload);
 
 const store = new Vuex.Store({
   state: {
-    message: 'Hello Vuex'
+    message: Env.greeting
   },
   getters: {
     message: state => state.message

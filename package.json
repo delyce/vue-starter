@@ -1,14 +1,14 @@
 {
   "name": "test",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "no description",
+  "main": "src/main.ts",
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --watch",
-    "serve": "node bin/httpd"
+    "serve": "webpack-dev-server"
   },
   "keywords": [],
-  "author": "delyce",
+  "author": "no author",
   "license": "GPL-3.0",
   "devDependencies": {
     "autoprefixer": "^9.5.1",
@@ -49,23 +49,14 @@
     "vuetify-loader": "^1.2.2",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-dev-server": "^3.4.1"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "body-parser": "^1.19.0",
-    "chart.js": "^2.8.0",
-    "express": "^4.16.4",
-    "morgan": "^1.9.1",
-    "multer": "^1.4.1",
-    "socket.io": "^2.2.0",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
-    "vue-chartjs": "^3.4.2",
     "vue-lazyload": "^1.2.6",
     "vue-router": "^3.0.6",
-    "vue-socket.io": "^3.0.7",
-    "vue-touch": "^1.1.0",
     "vuetify": "^1.5.14",
     "vuex": "^3.1.1"
   },
@@ -76,6 +67,5 @@
   "bugs": {
     "url": "https://github.com/delyce/test/issues"
   },
-  "homepage": "https://github.com/delyce/test#readme",
-  "description": "no description"
+  "homepage": "https://github.com/delyce/test#readme"
 }
