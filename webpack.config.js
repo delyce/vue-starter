@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,7 +11,7 @@ const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-module.exports = (env, options) => {
+const Config = {
   mode: 'development',
   entry: {
     app: './src/main.ts'
@@ -143,4 +144,9 @@ module.exports = (env, options) => {
     maxAssetSize: (1024 * 1024)
   }
 */
+}
+
+
+module.exports = (env, options) => {
+  return [Config];
 }
