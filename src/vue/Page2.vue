@@ -15,8 +15,11 @@
     }
     private getJSON() {
       this.$http.get('/get/axiostest')
-        .then((res: any) => {
-          this.$store.dispatch('message', res.data.message);
+        .then((response: AxiosResponse) => {
+          this.$store.dispatch('message', response.data.message);
+        })
+        .catch((error: AxiosError) => {
+          this.$store.dispatch('message', error.message);
         });
     }
   }

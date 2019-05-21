@@ -1,22 +1,22 @@
-const Path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
+const path = require('path');
+
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
 
-const AppConfig = {
-  mode: 'production',
+module.exports = (env, options) => {
+  mode: 'development',
   entry: {
-    app: './src/app.js'
+    app: './src/main.ts'
   },
   output: {
-    path: Path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist'),
     filename: '[name].js',
     publicPath: '/'
   },
@@ -61,7 +61,7 @@ const AppConfig = {
       },
       {
         test: /\.html$/,
-        use: ['html-loader?minimize=true']
+        use: ['html-loader']
       },
       {
         type: 'javascript/auto',
@@ -70,11 +70,11 @@ const AppConfig = {
       },
       {
         test: /\.(gif|png|jpg)$/,
-        use: ['file-loader?name=img/[name].[ext]?[md5:hash:base64:5]']
+        use: ['file-loader?name=img/[name].[ext]']
       },
       {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
-        use: ['file-loader?name=fonts/[name].[ext]?[md5:hash:base64:5]']
+        use: ['file-loader?name=fonts/[name].[ext]']
       },
       {
         test: /\.styl$/,
@@ -83,6 +83,7 @@ const AppConfig = {
     ]
   },
   optimization: {
+/*
     minimizer: [
       new TerserPlugin({
         terserOptions: {
@@ -107,12 +108,13 @@ const AppConfig = {
         }
       }),
     ],
+*/
     splitChunks: {
       cacheGroups: {
         vendors: {
           test: /node_modules/,
           name: "vendor",
-          chunks: "initial"
+          chunks: "all"
         }
       }
     }
@@ -124,60 +126,21 @@ const AppConfig = {
     },
   },
   plugins: [
-    new VueLoaderPlugin(),
-    new VuetifyLoaderPlugin(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ template: './src/assets/index.html', hash: true }),
     new CopyWebpackPlugin([
       { from: './src/assets/favicon.ico', to: '' },
       { from: './src/assets/apple-touch-icon.png', to: '' }
     ]),
     new MiniCssExtractPlugin({ filename: '[name].css' }),
-    new CleanWebpackPlugin(),
-    new HardSourceWebpackPlugin({ cacheDirectory: Path.join(__dirname, '.cache') })
+    new HardSourceWebpackPlugin({ cacheDirectory: path.join(__dirname, '.cache') }),
+    new VueLoaderPlugin(),
+    new VuetifyLoaderPlugin()
   ],
+/*
   performance: {
     maxEntrypointSize: (1024 * 1024),
     maxAssetSize: (1024 * 1024)
   }
+*/
 }
-
-const ServerConfig = {
-  mode: 'production',
-  entry: {
-    server: './src/server.js'
-  },
-  target: 'node',
-  node: {
-    __dirname: false,
-    __filename: false,
-  },
-  externals: [nodeExternals()],
-  output: {
-    path: Path.resolve(__dirname, 'bin'),
-    filename: 'httpd',
-    publicPath: '/'
-  },
-  resolve: {
-    modules: ['node_modules']
-  },
-  module: {
-    rules: [
-      {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        use: ['ts-loader', 'tslint-loader']
-      },
-      {
-        type: 'javascript/auto',
-        test: /\.json$/,
-        use: ['json-loader']
-      }
-    ]
-  },
-  performance: {
-    maxEntrypointSize: (1024 * 1024),
-    maxAssetSize: (1024 * 1024)
-  }
-}
-
-module.exports = [AppConfig, ServerConfig];

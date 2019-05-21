@@ -12,27 +12,25 @@
     <div>
       <p class="vars">vars</p>
     </div>
-
-<div v-lazy-container="{ selector: 'img' }">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-  <img data-src="http://placekitten.com/350/350">
-</div>
-
+    <div v-lazy-container="{ selector: 'img' }">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+      <img data-src="http://placekitten.com/350/350">
+    </div>
   </div>
 </template>
 
