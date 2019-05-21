@@ -1,5 +1,10 @@
+const REVISION = require('node-object-hash')({sort: false}).hash(process.env.npm_package_name + process.env.npm_package_version).substr(0, 10);
+
 const Path = require('path');
+const readline = require("readline");
+const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -9,6 +14,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
+
 const AppConfig = {
   mode: 'production',
   entry: {
@@ -16,7 +22,7 @@ const AppConfig = {
   },
   output: {
     path: Path.join(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: '[name].js?' + REVISION,
     publicPath: '/'
   },
   module: {
@@ -69,11 +75,15 @@ const AppConfig = {
       },
       {
         test: /\.(gif|png|jpg)$/,
-        use: ['file-loader?name=img/[name].[ext]?[md5:hash:base64:5]']
+        use: ['file-loader?name=img/[name].[ext]?' + REVISION]
       },
       {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
-        use: ['file-loader?name=fonts/[name].[ext]?[md5:hash:base64:5]']
+        use: ['file-loader?name=fonts/[name].[ext]?' + REVISION]
+      },
+      {
+        test: /\.styl$/,
+        use: ['style-loader', 'css-loader', 'stylus-loader']
       }
     ]
   },
@@ -104,29 +114,54 @@ const AppConfig = {
     ],
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        vendor: {
           test: /node_modules/,
-          name: "vendor",
-          chunks: "initial"
+          name: 'vendors',
+          chunks: 'all'
         }
       }
     }
   },
   resolve: {
     alias: {
-      vue$: 'vue/dist/vue.runtime.min.js'
+      vue$: 'vue/dist/vue.runtime.esm.js',
+      vuex$: 'vuex/dist/vuex.esm.js'
     },
   },
   plugins: [
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({ template: './src/assets/index.html', hash: true }),
+    new VuetifyLoaderPlugin(),
+    new HtmlWebpackPlugin({ template: './src/assets/index.html' }),
     new CopyWebpackPlugin([
       { from: './src/assets/favicon.ico', to: '' },
       { from: './src/assets/apple-touch-icon.png', to: '' }
     ]),
-    new MiniCssExtractPlugin({ filename: '[name].css' }),
+    new MiniCssExtractPlugin({ filename: '[name].css?' + REVISION }),
     new CleanWebpackPlugin(),
-    new HardSourceWebpackPlugin({ cacheDirectory: Path.join(__dirname, '.cache') })
+    new HardSourceWebpackPlugin({ cacheDirectory: Path.join(__dirname, '.cache') }),
+    new webpack.ProgressPlugin((percentage, message, ...args) => {
+      if (percentage == 0) {
+        console.info('');
+      }
+      if (percentage > 0) {
+        readline.moveCursor(process.stdout, 0, -1);
+        readline.clearLine(process.stdout);
+      }
+      if (percentage < 1) {
+        let msg = (message + ' ' + args.join(' '));
+        if (msg.length > process.stdout.columns - 7) {
+          msg = msg.substr(0, process.stdout.columns - 10) + '...';
+        }
+        console.info(
+          '\u001b[33m' + (percentage * 100).toFixed(1) + '%' + '\u001b[0m',
+          '\u001b[32m' + msg + '\u001b[0m');
+      }
+    }),
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(process.env.npm_package_name),
+      VERSION: JSON.stringify(process.env.npm_package_version),
+      REVISION: JSON.stringify(REVISION)
+    })
   ],
   performance: {
     maxEntrypointSize: (1024 * 1024),
@@ -173,4 +208,14 @@ const ServerConfig = {
   }
 }
 
-module.exports = [AppConfig, ServerConfig];
+module.exports = (env, options) => {
+  if (env && env.target == 'app') {
+    return [AppConfig];
+  }
+  else if (env && env.target == 'server') {
+    return [ServerConfig];
+  }
+  else {
+    return [AppConfig, ServerConfig];
+  }
+}
