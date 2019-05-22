@@ -2,13 +2,13 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify/lib';
-import VuetifyStyle from 'vuetify/src/stylus/app.styl';
-import Axios from 'axios';
+import 'vuetify/src/stylus/app.styl';
+import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueLazyload from 'vue-lazyload';
 
-import Env from './main-env.json';
-import Style from './main-style.scss';
+import env from './main-env.json';
+import './main-style.scss';
 
 import App from './vue/App.vue';
 import Page1 from './vue/Page1.vue';
@@ -17,12 +17,12 @@ import Page2 from './vue/Page2.vue';
 Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(Vuetify);
-Vue.use(VueAxios, Axios);
-Vue.use(VueLazyload);
+Vue.use(VueAxios, axios);
+Vue.use(VueLazyload, { preLoad: 1.3 });
 
 const store = new Vuex.Store({
   state: {
-    message: Env.greeting
+    message: env.greeting
   },
   getters: {
     message: state => state.message

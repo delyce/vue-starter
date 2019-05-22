@@ -6,12 +6,11 @@
 </template>
 
 <script lang="ts">
-  import Config from '../config.json';
   import { Vue, Component } from 'vue-property-decorator';
 
   @Component
   export default class Page1 extends Vue {
-    private greeting: string = Config.greeting;
+    private greeting: string = '';
 
     private get message(): string {
       return this.$store.getters.message;

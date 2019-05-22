@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "lib": ["dom", "es5", "es2015.promise"],
+    "typeRoots": ["node_modules/@types", "node_modules/axios"],
     "types": ["vuetify"]
   }
 }
