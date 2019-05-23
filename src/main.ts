@@ -25,7 +25,7 @@ const store = new Vuex.Store({
     message: env.greeting
   },
   getters: {
-    message: state => state.message
+    message: (state) => state.message
   },
   mutations: {
     message(state, payload) {
@@ -50,5 +50,5 @@ const app = new Vue({
   el: '#app',
   store,
   router,
-  render: h => h(App)
+  render: (h) => h(App)
 });

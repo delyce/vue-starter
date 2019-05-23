@@ -16,8 +16,10 @@
       return this.$store.getters.message;
     }
 
-    private doUpdate(event: any) {
-      this.$store.dispatch('message', event.target.value);
+    private doUpdate(e: Event) {
+      if (e.target instanceof HTMLInputElement) {
+        this.$store.dispatch('message', e.target.value);
+      }
     }
   }
 </script>
