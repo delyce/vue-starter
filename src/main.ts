@@ -7,7 +7,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueLazyload from 'vue-lazyload';
 
-import Env from './main-env.json';
+import env from './main-env.json';
 import './main-style.scss';
 
 import App from './vue/App.vue';
@@ -18,37 +18,37 @@ Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(Vuetify);
 Vue.use(VueAxios, axios);
-Vue.use(VueLazyload);
+Vue.use(VueLazyload, { preLoad: 1.3 });
 
 const store = new Vuex.Store({
   state: {
-    message: Env.greeting,
+    message: env.greeting
   },
   getters: {
-    message: state => return state.message,
+    message: (state) => state.message
   },
   mutations: {
     message(state, payload) {
       state.message = payload.message;
-    },
+    }
   },
   actions: {
     message({commit}, message) {
       commit('message', {message});
-    },
-  },
+    }
+  }
 });
 
 const router = new VueRouter({
   routes: [
     { path: '/page1', component: Page1 },
-    { path: '/page2', component: Page2 },
-  ],
+    { path: '/page2', component: Page2 }
+  ]
 });
 
 const app = new Vue({
   el: '#app',
   store,
   router,
-  render: h => h(App),
+  render: (h) => h(App)
 });
