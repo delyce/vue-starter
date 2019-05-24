@@ -1,12 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HardSourcePlugin = require('hard-source-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
@@ -84,6 +84,7 @@ module.exports = (env, options) => {
       ]
     },
     optimization: {
+/*
       minimizer: [
         new TerserPlugin({
           terserOptions: {
@@ -106,8 +107,9 @@ module.exports = (env, options) => {
               }
             ]
           }
-        }),
+        })
       ],
+*/
       splitChunks: {
         cacheGroups: {
           vendors: {
@@ -125,20 +127,31 @@ module.exports = (env, options) => {
       },
     },
     plugins: [
+      new webpack.ProgressPlugin((percentage, msg) => {
+        if (percentage < 100) {
+          process.stdout.cursorTo(0);
+          process.stdout.write(`${Math.floor(percentage * 100, 1)}%: ${msg}`);
+          process.stdout.clearLine(1);
+        }
+      }),
+      new VueLoaderPlugin(),
+      new VuetifyLoaderPlugin(),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({ template: './src/assets/index.html' }),
       new CopyWebpackPlugin([
         { from: './src/assets/favicon.ico', to: '' },
         { from: './src/assets/apple-touch-icon.png', to: '' }
       ]),
-      new MiniCssExtractPlugin({ filename: '[name].css' }),
-      new HardSourcePlugin(),
-      new VueLoaderPlugin(),
-      new VuetifyLoaderPlugin()
+      new MiniCssExtractPlugin({ filename: '[name].css' })
     ],
     performance: {
       maxEntrypointSize: 1024 * 1024,
       maxAssetSize: 1024 * 1024
+    },
+    devServer: {
+      contentBase: path.join(__dirname, 'dist'),
+      watchContentBase: true,
+      port: 8080
     }
   }
 }

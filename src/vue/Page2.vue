@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <v-layout>
     <p>paeg2 {{ message }}</p>
-    <input type="button" value="Get JSON" @click="getJSON" />
-  </div>
+    <v-btn @click="getJSON">Get JSON</v-btn>
+  </v-layout>
 </template>
 
 <script lang="ts">

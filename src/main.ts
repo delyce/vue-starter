@@ -7,18 +7,18 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueLazyload from 'vue-lazyload';
 
+Vue.use(Vuex);
+Vue.use(VueRouter);
+Vue.use(Vuetify);
+Vue.use(VueAxios, axios);
+Vue.use(VueLazyload);
+
 import env from './main-env.json';
 import './main-style.scss';
 
 import App from './vue/App.vue';
 import Page1 from './vue/Page1.vue';
 import Page2 from './vue/Page2.vue';
-
-Vue.use(Vuex);
-Vue.use(VueRouter);
-Vue.use(Vuetify);
-Vue.use(VueAxios, axios);
-Vue.use(VueLazyload, { preLoad: 1.3 });
 
 const store = new Vuex.Store({
   state: {

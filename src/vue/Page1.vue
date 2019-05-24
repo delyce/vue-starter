@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>page1 {{ greeting }}</p>
-    <input type="text" :value="message" @input="doUpdate" />
+    <v-text-field type="text" :value="message" @input="doUpdate" />
   </div>
 </template>
 
