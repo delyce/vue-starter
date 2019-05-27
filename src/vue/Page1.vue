@@ -28,4 +28,7 @@
   p {
     backgournd: resolve('../assets/img/external-2.png') no-repeat;
   }
+  input {
+    background: resolve('../assets/img/external-3.png') no-repeat;
+  }
 </style>

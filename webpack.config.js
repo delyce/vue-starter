@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HardSourcePlugin = require('hard-source-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -12,13 +12,13 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = (env, options) => {
   return {
-    mode: 'production',
+    mode: options.mode,
     entry: {
       main: './src/main.ts'
     },
     output: {
       path: path.join(__dirname, 'dist'),
-      filename: '[name].js',
+      filename: '[name].js?[hash]',
       publicPath: '/'
     },
     module: {
@@ -30,7 +30,12 @@ module.exports = (env, options) => {
         {
           test: /\.ts$/,
           use: [
-            { loader: 'ts-loader', options: { appendTsSuffixTo: [/\.vue$/] } },
+            {
+               loader: 'ts-loader',
+               options: {
+                 appendTsSuffixTo: [/\.vue$/]
+               }
+            },
             'tslint-loader'
           ]
         },
@@ -84,7 +89,6 @@ module.exports = (env, options) => {
       ]
     },
     optimization: {
-/*
       minimizer: [
         new TerserPlugin({
           terserOptions: {
@@ -109,7 +113,6 @@ module.exports = (env, options) => {
           }
         })
       ],
-*/
       splitChunks: {
         cacheGroups: {
           vendors: {
@@ -127,31 +130,26 @@ module.exports = (env, options) => {
       },
     },
     plugins: [
-      new webpack.ProgressPlugin((percentage, msg) => {
-        if (percentage < 100) {
-          process.stdout.cursorTo(0);
-          process.stdout.write(`${Math.floor(percentage * 100, 1)}%: ${msg}`);
-          process.stdout.clearLine(1);
-        }
-      }),
       new VueLoaderPlugin(),
       new VuetifyLoaderPlugin(),
-      new CleanWebpackPlugin(),
+      new HardSourcePlugin(),
       new HtmlWebpackPlugin({ template: './src/assets/index.html' }),
       new CopyWebpackPlugin([
         { from: './src/assets/favicon.ico', to: '' },
         { from: './src/assets/apple-touch-icon.png', to: '' }
       ]),
-      new MiniCssExtractPlugin({ filename: '[name].css' })
+      new MiniCssExtractPlugin({ filename: '[name].css?[hash]' })
     ],
     performance: {
       maxEntrypointSize: 1024 * 1024,
       maxAssetSize: 1024 * 1024
     },
     devServer: {
+      proxy: {
+        '/api': 'http://localhost:3000/'
+      },
       contentBase: path.join(__dirname, 'dist'),
       watchContentBase: true,
-      port: 8080
     }
   }
 }
