@@ -1,3 +1,4 @@
+const packageJSON = require('./package.json');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -130,6 +131,9 @@ module.exports = (env, options) => {
       },
     },
     plugins: [
+      new webpack.DefinePlugin({
+        __VERSION__: JSON.stringify(packageJSON.name + ' ' + packageJSON.version)
+      }),
       new VueLoaderPlugin(),
       new VuetifyLoaderPlugin(),
       new HardSourcePlugin(),
@@ -145,10 +149,7 @@ module.exports = (env, options) => {
       maxAssetSize: 1024 * 1024
     },
     devServer: {
-      proxy: {
-        '/api': 'http://localhost:3000/'
-      },
-      contentBase: path.join(__dirname, 'dist'),
+      contentBase: path.join(__dirname, 'test'),
       watchContentBase: true,
     }
   }

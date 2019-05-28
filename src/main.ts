@@ -22,9 +22,11 @@ import Page2 from './vue/Page2.vue';
 
 const store = new Vuex.Store({
   state: {
+    version: __VERSION__,
     message: env.greeting
   },
   getters: {
+    version: (state) => state.version,
     message: (state) => state.message
   },
   mutations: {
