@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>page1 {{ greeting }}</p>
-    <input type="text" :value="message" @input="doUpdate" />
+    <v-text-field type="text" :value="message" @input="doUpdate" />
   </div>
 </template>
 
@@ -27,5 +27,8 @@
 <style lang="scss" scoped>
   p {
     backgournd: resolve('../assets/img/external-2.png') no-repeat;
+  }
+  input {
+    background: resolve('../assets/img/external-3.png') no-repeat;
   }
 </style>
