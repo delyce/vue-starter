@@ -20,8 +20,6 @@
           this.$store.dispatch('message', response.data.message);
         })
         .catch((error) => {
-<<<<<<< HEAD
-=======
           this.$store.dispatch('message', error.message);
         });
     }
@@ -31,7 +29,6 @@
           this.$store.dispatch('message', response.data.message);
         })
         .catch((error) => {
->>>>>>> origin/issue02
           this.$store.dispatch('message', error.message);
         });
     }
