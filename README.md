@@ -12,7 +12,7 @@ Vue + Express による Web アプリケーションのテンプレートです。
 
 ## Usage
 
-- 
+- フロントエンド側
 
 ```
 $ npm install
