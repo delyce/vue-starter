@@ -6,6 +6,7 @@
   "scripts": {
     "start": "ts-node . start"
     "stop": "ts-node . stop"
+    "restart": "ts-node . restart"
   },
   "keywords": [],
   "author": "no author",

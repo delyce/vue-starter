@@ -1,8 +1,7 @@
-Vue Project Template
+Vue Express Template
 ====================
 
-Vue + Axios による Web アプリケーションのテンプレートです。
-
+Vue + Express による Web アプリケーションのテンプレートです。
 
 
 ## Description
@@ -13,8 +12,9 @@ Vue + Axios による Web アプリケーションのテンプレートです。
 
 ## Usage
 
+- 
+
 ```
-$ cd app
 $ npm install
 $ npm run serve
 ```
