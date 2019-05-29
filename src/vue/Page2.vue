@@ -15,7 +15,7 @@
       return this.$store.getters.version + ': ' + this.$store.getters.message;
     }
     private getJSON() {
-      this.$http.get('/get/axiostest')
+      this.$http.get('/get.json')
         .then((response) => {
           this.$store.dispatch('message', response.data.message);
         })

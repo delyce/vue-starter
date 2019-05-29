@@ -1,6 +1,13 @@
 Vue Project Template
 ====================
 
+Vue + Axios による Web アプリケーションのテンプレートです。
+
+
+
+## Description
+
+- 
 
 ## Usage
 
