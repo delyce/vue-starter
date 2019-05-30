@@ -3,17 +3,13 @@ Vue Starter
 
 Vue による Web アプリケーションのスターターキットです。
 
-## Environment
-
-- Entry point = ./src/main.ts
-- TypeScript
-- SCSS
-- Vue + Vuex + VueRouter + Axios
 
 ## Description
 
 - 
 - 
+    /
+    |- src
 
 ## Usage
 
