@@ -1,38 +1,16 @@
 Vue Starter
 ============
 
-Vue による Web アプリケーションのスターターキットです。
+Vue 縺ｫ繧医ｋ Web 繧｢繝励Μ繧ｱ繝ｼ繧ｷ繝ｧ繝ｳ縺ｮ繧ｹ繧ｿ繝ｼ繧ｿ繝ｼ繧ｭ繝�繝医〒縺吶�
 
+## Environment
+
+- Entry point = ./src/main.ts
+- TypeScript
+- SCSS
+- Vue + Vuex + VueRouter + Axios
 
 ## Description
-
-- 構成
-
-	/
-	|- src/
-	|	|- assets/
-	|	|	|- img/
-	|	|	|	|- internal.png
-	|	|	|	|- external.png
-	|	|	|
-	|	|	|- index.html
-	|	|	|- favicon.ico
-	|	|	|- apple-touch-icon.png
-	|	|
-	|	|- vue/
-	|	|	|- App.vue
-	|	|	|- Page1.vue
-	|	|	|- Page2.vue
-	|	|
-	|	|- index.d.ts
-	|	|- main.ts
-	|	|- main-env.json
-	|	|- main-style.scss
-	|
-	|- package.json
-	|- package-lock.json
-	|- package.json
-	|- package.json
 
 - 
 - 
