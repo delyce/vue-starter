@@ -1,14 +1,12 @@
-Vue Starter
+# Vue Starter
 ============
 
-Vue による Web アプリケーションのスターターキットです。
+Vue による Web アプリケーション開発のスターターキットです。
 
 
 ## Description
 
-- ディレクトリ構成
-    /
-    |- src
+
 
 ## Usage
 
@@ -20,7 +18,6 @@ $ npm run serve
 browse http://localhost:8080/
 
 /test
-
 ```
 $ 
 $ npm run build
