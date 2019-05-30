@@ -10,14 +10,32 @@ Vue による Web アプリケーション開発のスターターキットで�
 
 ## Usage
 
+### セットアップ
+
 ```
 $ npm install
+```
+
+### デバッグサーバの起動
+
+デバッグサーバを起動すると、
+コンパイルされたプログラムがメモリ上にロードされます。
+
+```
 $ npm run serve
 ```
 
-browse http://localhost:8080/
+下記 URL から Web アプリケーションへアクセスできます。
 
-/test
+http://localhost:8080/
+
+### テスト JSON データの配置
+
+* /test/{METHOD}.json * に JSON データを配置すれば、
+Web アプリケーションと JSON サーバとの連携テストが可能です。
+
+
+
 ```
 $ 
 $ npm run build
