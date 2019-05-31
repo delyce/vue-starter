@@ -16,10 +16,6 @@
           <p class="vars">vars</p>
         </div>
       </v-layout>
-      <v-layout v-for="image in images" :key="image.id">
-        <img v-lazy="image.src" height="500" />
-        <v-spacer />
-      </v-layout>
     </v-content>
   </v-app>
 </template>
@@ -29,13 +25,6 @@
 
   @Component
   export default class App extends Vue {
-    private images = [
-      { id: 1, src: '/img/external.png?1' },
-      { id: 2, src: '/img/external.png?2' },
-      { id: 3, src: '/img/external.png?3' },
-      { id: 4, src: '/img/external.png?4' },
-      { id: 5, src: '/img/external.png?5' }
-    ];
   }
 </script>
 

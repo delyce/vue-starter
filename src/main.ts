@@ -5,13 +5,11 @@ import Vuetify from 'vuetify/lib';
 import 'vuetify/src/stylus/app.styl';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import VueLazyload from 'vue-lazyload';
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(Vuetify);
 Vue.use(VueAxios, axios);
-Vue.use(VueLazyload);
 
 import env from './main-env.json';
 import './main-style.scss';
