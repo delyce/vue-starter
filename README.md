@@ -1,7 +1,7 @@
 # Vue Starter
 
 
-## ■ Description
+## Description
 
 Vue による Web アプリケーション開発のスターターキットです。
 
