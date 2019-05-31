@@ -1,9 +1,8 @@
 # Vue Starter
 
-Vue による Web アプリケーション開発のスターターキットです。
-
 ## Description
 
+Vue による Web アプリケーション開発のスターターキットです。
 
 ## Usage
 
@@ -24,7 +23,7 @@ $ npm run serve
 
 下記 URL から Web アプリケーションへアクセスできます。
 
-http://localhost:8080/
+[http://localhost:8080/]
 
 ### テスト JSON データの配置
 
