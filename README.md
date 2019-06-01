@@ -29,7 +29,7 @@ http://localhost:8080/
 
 ### テスト JSON データの配置
 
-**/test/{METHOD}.json** に JSON データを配置すれば、
+**/test/{METHOD}.json** のように JSON データを配置すれば、
 Web アプリケーションと JSON サーバとの簡易的な連携テストができます。
 
 ### 本番用ビルド
