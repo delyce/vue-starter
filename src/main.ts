@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify/lib';
-import 'vuetify/src/stylus/app.styl';
+// import 'vuetify/src/stylus/app.styl';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
@@ -12,7 +12,7 @@ Vue.use(Vuetify);
 Vue.use(VueAxios, axios);
 
 import env from './main-env.json';
-import './main-style.scss';
+import './main-style.styl';
 
 import App from './vue/App.vue';
 import Page1 from './vue/Page1.vue';

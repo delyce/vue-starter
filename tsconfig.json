@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "es2015",
+    "target": "ES5",
+    "module": "ES2015",
+    "lib": ["dom", "es5", "es2015.promise"],
     "strict": true,
     "noImplicitThis": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "lib": ["dom", "es5", "es2015.promise"],
     "baseUrl": ".",
+    "paths": { "*": ["node_modules/@types", "node_module/axios"] },
     "types": ["vuetify"],
-    "paths": { "*": ["node_modules/@types", "node_module/axios"] }
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

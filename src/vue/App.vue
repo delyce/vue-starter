@@ -1,24 +1,27 @@
 <template>
   <v-app>
+    <v-navigation-drawer app></v-navigation-drawer>
+    <v-toolbar app>
+      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-toolbar-title><router-link to="/">Title</router-link></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn flat><router-link to="/"><v-icon>home</v-icon></router-link></v-btn>
+        <v-btn flat><router-link to="/event"><v-icon>event</v-icon></router-link></v-btn>
+        <v-btn flat><router-link to="/info"><v-icon>info</v-icon></router-link></v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
     <v-content>
-      <v-layout>
-        <v-flex><v-btn><v-icon>home</v-icon> Home</v-btn></v-flex>
-        <v-flex><img src="../assets/img/external.png" /></v-flex>
-      </v-layout>
-      <v-layout>
-        <v-flex><router-link to="/page1">to Page1</router-link></v-flex>
-        <v-flex><router-link to="/page2">to Page2</router-link></v-flex>
-      </v-layout>
-      <v-layout><router-view></router-view></v-layout>
-      <v-layout>
-        <div class="styling">
-          <p>Nested</p>
-          <p class="vars">vars</p>
-        </div>
-      </v-layout>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
     </v-content>
+    <v-footer app></v-footer>
   </v-app>
 </template>
+
+<style lang="scss" scoped>
+</style>
 
 <script lang="ts">
   import { Vue, Component } from 'vue-property-decorator';
@@ -27,20 +30,3 @@
   export default class App extends Vue {
   }
 </script>
-
-<style lang="scss" scoped>
-  $color: red;
-  //$color: blue;
-
-  div.styling {
-    display: flex;
-    background: inline(../assets/img/internal.png) no-repeat;
-
-    p {
-      font-weight: bold;
-    }
-    p.vars {
-      color: $color;
-    }
-  }
-</style>
