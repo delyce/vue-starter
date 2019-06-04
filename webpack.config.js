@@ -4,7 +4,6 @@ const webpack = require('webpack');
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
-const HardSourcePlugin = require('hard-source-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -136,7 +135,6 @@ module.exports = (env, options) => {
       }),
       new VueLoaderPlugin(),
       new VuetifyLoaderPlugin(),
-      new HardSourcePlugin(),
       new HtmlWebpackPlugin({ template: './src/assets/index.html' }),
       new CopyWebpackPlugin([
         { from: './src/assets/favicon.ico', to: '' },

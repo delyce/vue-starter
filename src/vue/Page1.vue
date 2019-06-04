@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <p>page1 {{ greeting }}</p>
+  <v-layout>
     <v-text-field type="text" :value="message" @input="doUpdate" />
-  </div>
+  </v-layout>
 </template>
 
 <script lang="ts">
@@ -10,8 +9,6 @@
 
   @Component
   export default class Page1 extends Vue {
-    private greeting: string = '';
-
     private get message(): string {
       return this.$store.getters.message;
     }
@@ -25,10 +22,7 @@
 </script>
 
 <style lang="scss" scoped>
-  p {
-    backgournd: resolve('../assets/img/external-2.png') no-repeat;
-  }
-  input {
-    background: resolve('../assets/img/external-3.png') no-repeat;
+  .layout {
+    background: resolve('../assets/img/external.png') no-repeat;
   }
 </style>

@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify/lib';
-// import 'vuetify/src/stylus/app.styl';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
